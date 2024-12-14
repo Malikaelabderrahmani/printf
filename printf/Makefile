@@ -1,7 +1,9 @@
 NAME = libftprintf.a
 CFALGS = -Wall -Wextra -Werror
 CC = cc
-SRC = conversions/ft_putchar.c ft_printf.c
+SRC = conversions/ft_putchar.c conversions/ft_putstr.c \
+      conversions/ft_putnbr.c conversions/ft_puthex.c \
+      conversions/ft_putun.c ft_printf.c
 OBJ = $(SRC:.c=.o)
 
 all : $(NAME)

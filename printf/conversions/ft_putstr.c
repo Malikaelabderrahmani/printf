@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include "ft_printf.h"
 
-void	ft_putstr(cha *ch)
+void	ft_putstr(char *ch, int *l)
 {
 	int	i;
 
@@ -10,5 +10,6 @@ void	ft_putstr(cha *ch)
 	{
 		write(1, &ch[i], 1);
 		i++;
+		(*l)++;
 	}
 }
