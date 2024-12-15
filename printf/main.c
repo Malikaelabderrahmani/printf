@@ -1,9 +1,13 @@
 #include <stdio.h>
-#include "ft_printf.h"
+#include "conversions/ft_printf.h"
 
 int main()
 {
-	//printf("%d", ft_printf("salam %c\n", 'Y'));
-	printf("%x", -1);
+	char *c = "salam";
+	int i, u;
+	i = printf("%s %s comment cava, j'ai %d et je veux faire %p %x, %X\n", c, "Malika", 123456789, c, 255, 255);
+	u = ft_printf("%s %s comment cava, j'ai %d et je veux faire %p %x, %X\n", c, "Malika", 123456789, c, 255, 255);
+	printf("%d\n", i);
+	printf("%d", u);
 	return (0);
 }

@@ -1,4 +1,15 @@
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-abde <mel-abde@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/15 10:46:47 by mel-abde          #+#    #+#             */
+/*   Updated: 2024/12/15 16:18:13 by mel-abde         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	ft_putstr(char *ch, int *l)
@@ -6,10 +17,26 @@ void	ft_putstr(char *ch, int *l)
 	int	i;
 
 	i = 0;
-	while (ch[i])
+	if (ch == NULL)
 	{
-		write(1, &ch[i], 1);
-		i++;
-		(*l)++;
+		if (write(1, "(null)", 6) == -1)
+		{
+			(*l) = -1;
+			return ;
+		}
+		(*l) = (*l) + 6;
+	}
+	else
+	{
+		while (ch[i])
+		{
+			if (write(1, &ch[i], 1) == -1)
+			{
+				(*l) = -1;
+				return ;
+			}
+			i++;
+			(*l)++;
+		}
 	}
 }
