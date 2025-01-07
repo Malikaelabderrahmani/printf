@@ -6,11 +6,11 @@
 /*   By: mel-abde <mel-abde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 10:47:02 by mel-abde          #+#    #+#             */
-/*   Updated: 2024/12/15 16:45:57 by mel-abde         ###   ########.fr       */
+/*   Updated: 2024/12/15 17:54:02 by mel-abde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "conversions/ft_printf.h"
+#include "ft_printf.h"
 
 static void	ft_helper1(va_list l, char c, int *len)
 {
@@ -30,30 +30,26 @@ static void	ft_helper1(va_list l, char c, int *len)
 		ft_putchar('%', len);
 }
 
-int	ft_printf(char *ch, ...)
+int	ft_printf(const char *ch, ...)
 {
 	int		i;
 	va_list	l;
 	int		len;
 
-	len = ((i = 0), 0);
+	len = 0;
+	i = 0;
 	va_start(l, ch);
 	while (ch[i])
 	{
-		if (ch[i] == '%' && ch[i + 1])
+		if (ch[i] == '%')
 		{
 			ft_helper1(l, ch[i + 1], &len);
-			if (len == -1)
-				return (-1);
 			i++;
 		}
 		else
-		{
 			ft_putchar(ch[i], &len);
-			if (len == -1)
-				return (-1);
-		}
-		i++;
+		if (ch[i])
+			i++;
 	}
 	va_end(l);
 	return (len);

@@ -6,7 +6,7 @@
 /*   By: mel-abde <mel-abde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 10:46:36 by mel-abde          #+#    #+#             */
-/*   Updated: 2024/12/15 16:13:21 by mel-abde         ###   ########.fr       */
+/*   Updated: 2024/12/15 17:04:58 by mel-abde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,12 @@ void	ft_puthex(unsigned int nb, int *l, char c)
 		ch = "0123456789ABCDEF";
 	if (nb >= 0 && nb <= 15)
 	{
-		if (write(1, &ch[nb], 1) == -1)
-		{
-			(*l) = -1;
-			return ;
-		}
-		else
-			(*l)++;
+		write(1, &ch[nb], 1);
+		(*l)++;
 	}
 	else
 	{
 		ft_puthex(nb / 16, l, c);
-		if ((*l) == -1)
-			return ;
 		ft_puthex(nb % 16, l, c);
-		if ((*l) == -1)
-			return ;
 	}
 }

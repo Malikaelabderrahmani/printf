@@ -6,18 +6,14 @@
 /*   By: mel-abde <mel-abde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 10:46:21 by mel-abde          #+#    #+#             */
-/*   Updated: 2024/12/15 16:13:00 by mel-abde         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:07:30 by mel-abde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "ft_printf.h"
 
 void	ft_putchar(int c, int *l)
 {
-	if (write(1, &c, 1) == -1)
-	{
-		(*l) = -1;
-		return ;
-	}
+	write(1, &c, 1);
 	(*l)++;
 }

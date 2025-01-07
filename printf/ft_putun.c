@@ -1,42 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putun.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-abde <mel-abde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 10:46:47 by mel-abde          #+#    #+#             */
-/*   Updated: 2024/12/15 16:18:13 by mel-abde         ###   ########.fr       */
+/*   Created: 2024/12/15 10:46:57 by mel-abde          #+#    #+#             */
+/*   Updated: 2024/12/15 18:08:40 by mel-abde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putstr(char *ch, int *l)
+void	ft_putun(unsigned int nb, int *l)
 {
-	int	i;
-
-	i = 0;
-	if (ch == NULL)
-	{
-		if (write(1, "(null)", 6) == -1)
-		{
-			(*l) = -1;
-			return ;
-		}
-		(*l) = (*l) + 6;
-	}
+	if (nb >= 0 && nb <= 9)
+		ft_putchar(nb + 48, l);
 	else
 	{
-		while (ch[i])
-		{
-			if (write(1, &ch[i], 1) == -1)
-			{
-				(*l) = -1;
-				return ;
-			}
-			i++;
-			(*l)++;
-		}
+		ft_putun(nb / 10, l);
+		ft_putun(nb % 10, l);
 	}
 }

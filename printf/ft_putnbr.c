@@ -1,50 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putptr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-abde <mel-abde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 10:46:44 by mel-abde          #+#    #+#             */
-/*   Updated: 2024/12/15 16:29:10 by mel-abde         ###   ########.fr       */
+/*   Created: 2024/12/15 10:46:39 by mel-abde          #+#    #+#             */
+/*   Updated: 2024/12/15 17:16:31 by mel-abde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_helper1(unsigned long p, int *l)
+static void	ft_recur(int nb, int *l)
 {
-	char const	*ch;
+	char	c;
 
-	ch = "0123456789abcdef";
-	if (p >= 0 && p <= 15)
+	if (nb >= 0 && nb <= 9)
 	{
-		if (write(1, &ch[p], 1) == -1)
-		{
-			(*l) = -1;
-			return ;
-		}
-		else
-			(*l)++;
+		c = nb + 48;
+		write(1, &c, 1);
+		(*l)++;
 	}
 	else
 	{
-		ft_helper1(p / 16, l);
-		ft_helper1(p % 16, l);
+		ft_recur(nb / 10, l);
+		ft_recur(nb % 10, l);
 	}
 }
 
-void	ft_putptr(void *pt, int *l)
+void	ft_putnbr(int nb, int *l)
 {
-	unsigned long	p;
-
-	p = (unsigned long)(pt);
-	if (write(1, "0x", 2) == -1)
+	if (nb == -2147483648)
 	{
-		(*l) = -1;
-		return ;
+		write(1, "-2147483648", 11);
+		(*l) = (*l) + 11;
+	}
+	else if (nb < 0)
+	{
+		write(1, "-", 1);
+		(*l)++;
+		nb = nb * (-1);
+		ft_recur(nb, l);
 	}
 	else
-		(*l) = (*l) + 2;
-	ft_helper1(p, l);
+		ft_recur(nb, l);
 }
